@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bot',
 
 ]
@@ -134,13 +135,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'bot' / 'static',
     BASE_DIR / 'frontend' / 'build' / 'static',
 ]
 
-REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

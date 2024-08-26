@@ -1,27 +1,20 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Character
-import json
-from django.views.decorators.cache import never_cache
+from rest_framework import viewsets
+from .models import DiscordUser, Character, DiscordUserAndCharacters
+from .serializers import DiscordUserSerializer, CharacterSerializer, DiscordUserAndCharactersSerializer
 from django.views.generic import TemplateView
+from django.views.decorators.cache import never_cache
 
+class DiscordUserViewSet(viewsets.ModelViewSet):
+    queryset = DiscordUser.objects.all()
+    serializer_class = DiscordUserSerializer
 
+class CharacterViewSet(viewsets.ModelViewSet):
+    queryset = Character.objects.all()
+    serializer_class = CharacterSerializer
 
-def character_list(request):
-    if request.method == 'GET':
-        characters = Character.objects.all().values('id', 'name')
-        return JsonResponse(list(characters), safe=False)
-    elif request.method == 'POST':
-        data = json.loads(request.body)
-        character = Character.objects.create(name=data['name'])
-        return JsonResponse({'id': character.id, 'name': character.name}, status=201)
-
-@csrf_exempt
-def character_create(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        character = Character.objects.create(name=data['name'])
-        return JsonResponse({'id': character.id, 'name': character.name}, status=201)
+class DiscordUserAndCharactersViewSet(viewsets.ModelViewSet):
+    queryset = DiscordUserAndCharacters.objects.all()
+    serializer_class = DiscordUserAndCharactersSerializer
 
 # Serve React App
 index = never_cache(TemplateView.as_view(template_name='index.html'))

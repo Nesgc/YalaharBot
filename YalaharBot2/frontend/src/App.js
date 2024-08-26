@@ -6,18 +6,28 @@ import Home from './components/Home';
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/characters">Characters</Link></li>
+      <div className="min-h-screen bg-gray-100">
+        <nav className="bg-blue-600 p-4">
+          <ul className="flex space-x-4 justify-center text-white">
+            <li>
+              <Link to="/" className="hover:text-blue-300 font-semibold">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/characters" className="hover:text-blue-300 font-semibold">
+                Characters
+              </Link>
+            </li>
           </ul>
         </nav>
 
-        <Routes>
-          <Route path="/characters" element={<CharacterManager />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <div className="container mx-auto p-8">
+          <Routes>
+            <Route path="/characters" element={<CharacterManager />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
