@@ -21,7 +21,7 @@ function App() {
             </li>
             <li>
               <Link to="/characters" className="hover:text-blue-300 font-semibold">
-                
+                Characters
               </Link>
             </li>
           </ul>
